@@ -113,6 +113,7 @@ $(document).ready(function() {
     }
   });
 
+  // event listener for decimal button
   $(".periodButton").on('click', function() {
     if(!period) {
       if (hasShownResult) {
@@ -130,6 +131,7 @@ $(document).ready(function() {
     }
   });
 
+  // initializes global variables
   function initialize() {
     operands = [];
     urlToSend = "";
