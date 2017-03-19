@@ -12,9 +12,11 @@ app.get('/',function(req,res) {
 app.get("/data/:operand1/:operand2/:operator",function(req,res) {
   console.log(req.params);
   console.log(req.params.operand1,req.params.operator,req.params.operand2);
+
+  var result;
   var operand1 = parseInt(req.params.operand1);
   var operand2 = parseInt(req.params.operand2);
-  var result;
+
   switch (req.params.operator) {
     case "add":
         result = operand1 + operand2;
@@ -29,6 +31,7 @@ app.get("/data/:operand1/:operand2/:operator",function(req,res) {
         result = operand1 / operand2;
       break;
   }
+
   console.log('Result is', result);
   res.send({result: result});
 });

@@ -1,0 +1,54 @@
+#container {
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+button {
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  background-color: #bfbfbf;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+#operand1 {
+  width: 220px;
+  height: 50px;
+  margin: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+input[type="text"]
+{
+    font-size:24px;
+}
+
+#blank {
+  padding: 5px:
+}
+
+#clearButton {
+  background-color: Gray;
+  padding: 5px:
+}
+
+.numberButton {
+  padding: 5px:
+}
+
+.operator {
+  background-color: LightSlateGray;
+  padding: 5px:
+}
+
+#equal {
+  background-color: LightSlateGray;
+  padding: 5px:
+}

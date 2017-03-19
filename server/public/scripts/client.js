@@ -2,6 +2,7 @@ var operands = [];
 var urlToSend;
 var currentOperator;
 var hasShownResult = false;
+var inputError = false;
 
 $(document).ready(function() {
   console.log("client ready");
@@ -27,33 +28,52 @@ $(document).ready(function() {
     console.log(operands);
 
     // get numbers and builds url
-    urlToSend = "/data/";
-    for (var i = 0; i < operands.length; i++) {
-      urlToSend += operands[i];
-      urlToSend += "/";
+    if(operands.length > 2) {
+      inputError = true;
+    } else {
+      urlToSend = "/data/";
+      for (var i = 0; i < operands.length; i++) {
+        if(operands[i] !== "") {
+          urlToSend += operands[i];
+          urlToSend += "/";
+        }
+        else {
+          inputError = true;
+        }
+      }
     }
-    console.log('currentOperator is: ',currentOperator);
-    urlToSend += currentOperator;
-    console.log(urlToSend);
 
-    // ajax get
-    $.ajax({
-            type: "GET",
-            url: urlToSend,
-            success: function(responseFromServer) {
-              console.log(responseFromServer);
-              // show result
-              $('#operand1').val("computing..").delay(3000);
-              setTimeout(function() {
-                  $('#operand1').val(responseFromServer.result);
-              }, 3000);
-              // resets global variables
-              operands = [];
-              urlToSend = "";
-              currentOperator = "";
-              hasShownResult = true;
-            }
-    });
+    if(!inputError) {
+      console.log('currentOperator is: ',currentOperator);
+      urlToSend += currentOperator;
+      console.log(urlToSend);
+
+      // ajax get
+      $.ajax({
+              type: "GET",
+              url: urlToSend,
+              success: function(responseFromServer) {
+                console.log(responseFromServer);
+                // show result
+                $('#operand1').val("computing..");
+                setTimeout(function() {
+                    $('#operand1').val(responseFromServer.result);
+                }, 3000);
+                // resets global variables
+                operands = [];
+                urlToSend = "";
+                currentOperator = "";
+                hasShownResult = true;
+              }
+      });
+    } else {
+      $('#operand1').val("input error");
+      operands = [];
+      urlToSend = "";
+      currentOperator = "";
+      hasShownResult = true;
+      inputError = false;
+    }
   });
 
   // event listener for clear button
@@ -81,5 +101,5 @@ $(document).ready(function() {
     // displays number on operand input
     $('#operand1').val(numberShown);
   });
-  
+
 });
