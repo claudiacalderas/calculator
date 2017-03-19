@@ -31,24 +31,25 @@ input[type="text"]
 }
 
 #blank {
-  padding: 5px:
+  padding: 5px;
 }
 
 #clearButton {
   background-color: Gray;
-  padding: 5px:
+  padding: 5px;
 }
 
 .numberButton {
-  padding: 5px:
+  padding: 5px;
+  color: Black;
 }
 
 .operator {
   background-color: LightSlateGray;
-  padding: 5px:
+  padding: 5px;
 }
 
 #equal {
   background-color: LightSlateGray;
-  padding: 5px:
+  padding: 5px;
 }
