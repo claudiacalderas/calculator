@@ -38,7 +38,7 @@ $(document).ready(function() {
     } else {
       urlToSend = "/data/";
       for (var i = 0; i < operands.length; i++) {
-        if(operands[i] !== "") {
+        if(operands[i] !== "" && operands[i] !== ".") {
           urlToSend += operands[i];
           urlToSend += "/";
         }
