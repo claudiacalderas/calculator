@@ -11,6 +11,7 @@ $(document).ready(function() {
   // event listener for + - * / buttons
   $('.operator').on('click', function() {
     console.log('operator button clicked');
+    period = false;
 
     // pushes value in input into array of operands
     operands.push($('#operand1').val());
