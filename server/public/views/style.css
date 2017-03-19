@@ -30,26 +30,21 @@ input[type="text"]
     font-size:24px;
 }
 
-#blank {
-  padding: 5px;
-}
-
 #clearButton {
   background-color: Gray;
   padding: 5px;
 }
 
-.numberButton {
+.numberButton, .periodButton, #negativePositive{
   padding: 5px;
   color: Black;
 }
 
-.operator {
-  background-color: LightSlateGray;
-  padding: 5px;
+.zero {
+  width: 178px;
 }
 
-#equal {
+.operator, #equal {
   background-color: LightSlateGray;
   padding: 5px;
 }

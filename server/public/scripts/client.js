@@ -3,6 +3,7 @@ var urlToSend = "";
 var currentOperator = "";
 var hasShownResult = false;
 var inputError = false;
+var period = false;
 
 $(document).ready(function() {
   console.log("client ready");
@@ -24,12 +25,15 @@ $(document).ready(function() {
   // event listener for = button
   $('#equal').on('click', function() {
     // pushes value in input into array of operands
-    operands.push($('#operand1').val());
+    var valueInInput = $('#operand1').val();
+    if (valueInInput != "input error" && valueInInput!== "") {
+      operands.push(valueInInput);
+    }
     console.log(operands);
 
     // get numbers and builds url
     // validates input
-    if(operands.length > 2) {
+    if(operands.length > 2 || currentOperator === "") {
       inputError = true;
     } else {
       urlToSend = "/data/";
@@ -61,19 +65,12 @@ $(document).ready(function() {
                     $('#operand1').val(responseFromServer.result);
                 }, 3000);
                 // resets global variables
-                operands = [];
-                urlToSend = "";
-                currentOperator = "";
-                hasShownResult = true;
+                initialize();
               }
       });
     } else {
       $('#operand1').val("input error");
-      operands = [];
-      urlToSend = "";
-      currentOperator = "";
-      hasShownResult = true;
-      inputError = false;
+      initialize();
     }
   });
 
@@ -81,11 +78,7 @@ $(document).ready(function() {
   $('#clearButton').on('click', function() {
     console.log('clearButton clicked');
     $('#operand1').val('');
-    operands = [];
-    urlToSend = "";
-    currentOperator = "";
-    hasShownResult = false;
-    inputError = false;
+    initialize();
   });
 
   // event listener for number buttons
@@ -103,5 +96,47 @@ $(document).ready(function() {
     // displays number on operand input
     $('#operand1').val(numberShown);
   });
+
+  // event listener for negativePositive button
+  $("#negativePositive").on('click', function() {
+    var value;
+    value = $('#operand1').val();
+    if(value !== "" && value !== "input error") {
+      console.log(value);
+      if (parseFloat(value) > 0) {
+        value = "-" + $('#operand1').val();
+      } else {
+        value = value.substring(1,value.length);
+      }
+      console.log(value);
+      $('#operand1').val(value);
+    }
+  });
+
+  $(".periodButton").on('click', function() {
+    if(!period) {
+      if (hasShownResult) {
+          $('#operand1').val('');
+          hasShownResult = false;
+      }
+
+      // get number
+      var numberClicked = $(this).attr("id");
+      var numberShown = $('#operand1').val();
+      numberShown += numberClicked;
+      // displays number on operand input
+      $('#operand1').val(numberShown);
+      period = true;
+    }
+  });
+
+  function initialize() {
+    operands = [];
+    urlToSend = "";
+    currentOperator = "";
+    hasShownResult = true;
+    inputError = false;
+    period = false;
+  }
 
 });
