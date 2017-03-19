@@ -6,6 +6,7 @@ var hasShownResult = false;
 $(document).ready(function() {
   console.log("client ready");
 
+  // event listener for + - * / buttons
   $('.operator').on('click', function() {
     console.log('operator button clicked');
 
@@ -17,11 +18,9 @@ $(document).ready(function() {
     // gets which operator was clicked
     currentOperator = $(this).attr("id");
     console.log(currentOperator);
-
-    // operand1 = $('#operand1').val();
-    // operand2 = $('#operand2').val();
   });
 
+  // event listener for = button
   $('#equal').on('click', function() {
     // pushes value in input into array of operands
     operands.push($('#operand1').val());
@@ -36,6 +35,7 @@ $(document).ready(function() {
     console.log('currentOperator is: ',currentOperator);
     urlToSend += currentOperator;
     console.log(urlToSend);
+
     // ajax get
     $.ajax({
             type: "GET",
@@ -43,9 +43,11 @@ $(document).ready(function() {
             success: function(responseFromServer) {
               console.log(responseFromServer);
               // show result
-              // $('#result').empty();
-              // $('#result'). append('<span>' + responseFromServer.result + '</span>');
-              $('#operand1').val(responseFromServer.result);
+              $('#operand1').val("computing..").delay(3000);
+              setTimeout(function() {
+                  $('#operand1').val(responseFromServer.result);
+              }, 3000);
+              // resets global variables
               operands = [];
               urlToSend = "";
               currentOperator = "";
@@ -54,7 +56,7 @@ $(document).ready(function() {
     });
   });
 
-
+  // event listener for clear button
   $('#clearButton').on('click', function() {
     console.log('clearButton clicked');
     $('#operand1').val('');
@@ -64,7 +66,9 @@ $(document).ready(function() {
     currentOperator = "";
   });
 
+  // event listener for number buttons
   $('.numberButton').on('click', function(){
+    // checks if a result has just been shown
     if (hasShownResult) {
         $('#operand1').val('');
         hasShownResult = false;
@@ -76,10 +80,6 @@ $(document).ready(function() {
     numberShown += numberClicked;
     // displays number on operand input
     $('#operand1').val(numberShown);
-
-
-
   });
-
-
+  
 });
