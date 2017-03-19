@@ -14,8 +14,8 @@ app.get("/data/:operand1/:operand2/:operator",function(req,res) {
   console.log(req.params.operand1,req.params.operator,req.params.operand2);
 
   var result;
-  var operand1 = parseInt(req.params.operand1);
-  var operand2 = parseInt(req.params.operand2);
+  var operand1 = parseFloat(req.params.operand1);
+  var operand2 = parseFloat(req.params.operand2);
 
   switch (req.params.operator) {
     case "add":

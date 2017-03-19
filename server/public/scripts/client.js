@@ -1,6 +1,6 @@
 var operands = [];
-var urlToSend;
-var currentOperator;
+var urlToSend = "";
+var currentOperator = "";
 var hasShownResult = false;
 var inputError = false;
 
@@ -28,6 +28,7 @@ $(document).ready(function() {
     console.log(operands);
 
     // get numbers and builds url
+    // validates input
     if(operands.length > 2) {
       inputError = true;
     } else {
@@ -80,10 +81,11 @@ $(document).ready(function() {
   $('#clearButton').on('click', function() {
     console.log('clearButton clicked');
     $('#operand1').val('');
-    //$('#operand2').val('');
     operands = [];
     urlToSend = "";
     currentOperator = "";
+    hasShownResult = false;
+    inputError = false;
   });
 
   // event listener for number buttons
