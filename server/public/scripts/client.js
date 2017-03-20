@@ -60,7 +60,11 @@ $(document).ready(function() {
                 // show result
                 $('#operand1').val("computing..");
                 setTimeout(function() {
-                    $('#operand1').val(responseFromServer.result);
+                    if(responseFromServer.result !== null) {
+                      $('#operand1').val(responseFromServer.result);
+                    } else {
+                      $('#operand1').val("not a number");
+                    }
                 }, 3000);
                 // resets global variables
                 initialize();
@@ -140,7 +144,7 @@ $(document).ready(function() {
 
   // validate input
   function validNumber(value) {
-    if (value != "input error" && value!== "" && value!== ".") {
+    if (value != "input error" && value!== "" && value!== "." && value!= "not a number") {
       return true;
     } else {
       return false;
